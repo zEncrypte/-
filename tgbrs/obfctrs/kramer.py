@@ -1,17 +1,14 @@
 from random import choice, randint, shuffle
-from pystyleclean import Add, Center, Anime, Colors, Colorate, Write, System
+from pystyleclean import Center, Anime, Colors, Colorate, Write, System
 from os.path import isfile, isdir
 from py_compile import compile
-from os import listdir, mkdir, remove, rmdir, rename, chdir, name
+from os import listdir, mkdir, remove, rmdir, rename
 from shutil import move, copy, rmtree
 from time import sleep
 from binascii import hexlify
-
-
     
-    
-strings = "abcdefghijklmnopqrstuvwxyz0123456789"  # ne pas changer svp
-
+strings = "abcdefghijklmnopqrstuvwxyz0123456789"
+# Dont fix errors - vsc
 
 class Kyrie():
 
@@ -80,7 +77,7 @@ def kramer(content: str, key: int) -> str:
 
     content = _lines_sep_.join(hexlify(x.encode()).decode() for x in _content_)
 
-    _names_ = ["_eval", "_exec", "_byte", "_bytes", "_bit", "_bits", "_system", "_encode", "_decode", "_delete", "_exit", "_rasputin", "_kramer"]
+    _names_ = ["_eval", "_exec", "_byte", "_bytes", "_bit", "_bits", "_system", "_encode", "_decode", "_delete", "_exit", "_buster", "_kramer"]
     _names_ = ["self." + name for name in _names_]
     shuffle(_names_)
 

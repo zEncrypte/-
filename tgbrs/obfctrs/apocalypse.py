@@ -18,8 +18,8 @@ def stage(text: str, symbol: str = '...', col1 = light, col2 = None) -> str:
         col2 = light if symbol == '...' else ghoul
     return f""" {Col.Symbol(symbol, col1, ewe)} {col2}{text}{Col.reset}"""
 
-recursividad = 5 # Se vuelve ridiculamente mas lento, cuanto mayor sea este numero, pero sera mas "encriptado"
-base = 512 # Debe ser un numero entero, 2 - inf (recomiendo que se mantenga en 1024 o 512)
+recursividad = 5 # Se vuelve ridiculamente mas lento, cuanto mayor sea este numero, estara mas "encriptado"
+base = 512 # Debe ser un numero entero (recomiendo que se mantenga en 1024 o 512)
 indent = 0 # Cuantas sangrias se deben usar para espaciar el codigo real y el pase. Se utiliza para ocultar el codigo de un IDE
 bytes_allowed = True # Si esta deshabilitado, la base no puede estar por encima de 93
 

